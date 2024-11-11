@@ -24,3 +24,7 @@ console.log(y);
 // console.log(z); 이렇게 먼저 사용하면 오류
 let z = 100;
 console.log(z);
+
+// 호이스팅
+console.log(test); // undefined 출력
+var test = 100;

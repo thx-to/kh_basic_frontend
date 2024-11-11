@@ -30,32 +30,6 @@ let memberinfo = {
 };
 console.log(memberinfo.getInfo());
 
-// 비교연산자 : 자바스크립트에는 동등연산자와 일치연산자가 있음
-
-// 동등연산자 : 값이 같은지 확인
-// 값이 같으면 true
-console.log(1 == "1"); // true
-
-// 일치연산자 : 값과 자료형이 같은지 확인
-// 값 AND 자료형이 같으면 true
-console.log(1 === "1"); // false
-
-// 값 AND 자료형이 다르면 true
-console.log(1 !== "1"); // true
-
-// 형변환 : 묵시적 형변환과 명시적 형변환이 있음
-
-// 묵시적 형변환
-// 숫자와 문자열을 결합하면 문자열로 자동 형변환
-let num1 = 10 + "10"; // 1010
-console.log(num1);
-
-// 명시적 형변환
-// 10이라는 문자열을("10") Number타입으로 변환
-let num2 = 10 + Number("10"); // 20
-console.log(num2);
-
-// 명시적 형변환이 묵시적 형변환이 동시에 일어남
-// 10이라는 숫자를 문자열로 바꿔주고(명시), 결과값은 문자열(1010)로 자동형변환(묵시)
-let num3 = 10 + String("10"); // 1010
-console.log(num3);
+// toString() : 배열 안의 모든 문자를 쉼표(,)를 이용해 모두 결합해서 하나의 문자열로 반환
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
+console.log(fruits.toString());

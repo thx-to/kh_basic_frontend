@@ -1,0 +1,21 @@
+        * {
+            box-sizing: border-box;
+        }
+        .menu {
+            width: 400px;
+            height: 300px;
+            box-shadow: 1px 1px 5px black;
+            border-radius: 10px;
+            background-image: url(./ham2.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu p {
+            font-size: 4em;
+            font-weight: bold;
+            color: yellow;
+            text-shadow: 2px 2px 5px black;
+        }
