@@ -200,3 +200,67 @@ checkAnimalMoodCallback("sad", dogDance, ()=>console.log("🎃 호박이 웃고 
 
 
 // 타이머 설정과 Callback 함수
+// buyToy 함수가 실행뵈면 pay함수가 callback으로 전달
+// setTimeout은 2초 후에 callback(total)을 실행
+// callback은 pay 함수이므로 결과적으로 pay(total)이 호출됨
+// 즉, callback은 실행될 때 pay함수로 대체되고, pay함수는 total 값을 받아서 그에 맞는 출력을 함
+// 콜백 함수는 특정 작업을 다른 함수에서 실행할 수 있도록 전달되는 함수
+
+function buyToy(item, price, quantity, callback) {
+  console.log(
+    "🧒 아이가 '" + item + "' 장난감을 " + quantity + "개 골라서 엄마에게 가져갔습니다.");
+  // 시간이 경과된 후 등록된 함수를 자동으로 불러줌
+    setTimeout(function () {
+    console.log("💰 계산이 필요합니다.");
+    var total = price * quantity;
+    callback(total);
+  }, 2000);
+}
+function pay(total) {
+  console.log("엄마: '지불할 금액은 " + total + "원입니다.'");
+  console.log("🧒 아이: '와! 고마워요, 엄마!' 🎉");
+}
+buyToy("공룡 장난감", 3000, 3, pay);
+
+// 함수 표현식(화살표 함수)으로 구현해보기
+const buyToy = (item, price, quantity, callback) => {
+  console.log(  "🧒 아이가 '" + item + "' 장난감을 " + quantity + "개 골라서 엄마에게 가져갔습니다.");
+  setTimeout(() => {
+    console.log("💰 계산이 필요합니다.");
+    let total = price * quantity;
+    callback(total);
+  }, 2000);
+};
+const pay = (total) => {
+  console.log("엄마: '지불할 금액은 " + total + "원입니다.'");
+  console.log("🧒 아이: '와! 고마워요, 엄마!' 🎉");
+};
+buyToy("공룡 장난감", 3000, 3, pay);
+
+
+// 이벤트 핸들러에서 콜백 함수 사용하기
+const btn = document.querySelector("#myBtn");
+
+// 이게 콜백 함수가 됨 "클릭이 되면"
+btn.addEventListener("click", () => {
+  console.log("콜백으로 등록된 버튼이 클릭되었습니다.");
+});
+
+
+// 비동기적 작업에서 콜백 함수 사용
+function fetchData(callback) {
+  // 서버로부터 데이터를 가져오는 비동기 함수
+  let data = ...
+  callback(data);
+}
+fetchData(function(data) {
+  console.log(data);
+});
+
+
+// 값으로서의 함수
+function square(x) {
+  return x * x;
+}
+const sq = square;
+console.log(sq(5));
