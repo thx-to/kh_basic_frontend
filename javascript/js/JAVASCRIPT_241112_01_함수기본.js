@@ -155,3 +155,48 @@ console.log(`블록 외부 : ${g}`); // 20
   console.log(message); // Hello, world!
 })();
 console.log(message); // Reference Error : message is not defined
+
+
+// Callback 함수 : 함수의 인자로 다른 함수를 전달하여, 그 함수가 실행될 때 호출되는 함수
+// 주로 비동기 처리나 사용자 이벤트 처리에 사용
+
+// 함수를 매개변수로 넘기기
+function birdSing() {
+  console.log("🐦 새가 즐겁게 노래합니다!");
+}
+function catCry() {
+  console.log("😿 고양이가 슬프게 웁니다.");
+}
+function dogDance() {
+  console.log("🐶 강아지가 신나게 춤을 춥니다!");
+}
+
+// 일반 함수로 구현하기 : 정형화된 코드로 동적인 관계로의 전환이 힘듦
+// 함수에서 함수를 불러주는 구조를 만듦
+function checkAnimalMood(mood) {
+  if (mood === "happy") birdSing();
+  else if (mood === "sad") catCry();
+  else dogDance();
+}
+checkAnimalMood("happy"); // 🐦 새가 즐겁게 노래합니다!
+checkAnimalMood("sad"); // 😿 고양이가 슬프게 웁니다.
+checkAnimalMood(); // 🐶 강아지가 신나게 춤을 춥니다!
+
+// 콜백 함수로 만들기
+// 함수의 매개변수로 변수가 아닌 함수를 넣음(happyAction, sadAction)
+// 기분이 좋을 때 birSing이 될 수도 있고, dogDance가 될 수도 있음 (등록하기에 따라)
+function checkAnimalMoodCallback(mood, happyAction, sadAction) {
+  if (mood === "happy") happyAction(); // 함수를 등록, 함수의 주소가 들어감(함수표현식)
+  else if (mood === "sad") sadAction();
+}
+// 내가 등록한 함수가 무드 선택에 따라 불려짐
+// 등록을 해주는거라 ()가 들어가지 않음
+// dog Dance(), catCry()처럼 ()를 넣어주면 등록이 아닌 호출이 됨
+checkAnimalMoodCallback("happy", dogDance, catCry); // 🐶 강아지가 신나게 춤을 춥니다!
+checkAnimalMoodCallback("sad", dogDance, catCry); // 😿 고양이가 슬프게 웁니다.
+
+// dogDance 등의 함수를 만들어 등록하지 않고 익명의 함수를 사용하는 방법이 더 효율적임
+checkAnimalMoodCallback("sad", dogDance, ()=>console.log("🎃 호박이 웃고 있습니다.")); // 🎃 호박이 웃고 있습니다.
+
+
+// 타이머 설정과 Callback 함수
