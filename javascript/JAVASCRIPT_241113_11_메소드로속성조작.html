@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메소드로속성조작</title>
+</head>
+<body>
+  <a href="https://google.com">Google</a>
+  <script>
+
+    // 태그 선택자로 a태그 선택
+    // a태그가 여러개 있으면 가장 먼저 만나는 a태그 선택
+    const el = document.querySelector("a");
+
+    // 속성 선택자로 특정 속성 선택
+    const href = el.getAttribute("href"); // 속성명 선택
+    console.log(href); // Google 문구 클릭시 링크로 이동
+
+    el.setAttribute("href", "https://naver.com"); // 속성명, 속성값 설정
+    el.innerText = "네이버";
+
+    el.removeAttribute("href");
+    console.log(href); // href 속성이 삭제되어 문구만 남게 됨
+
+  </script>
+</body>
+</html>

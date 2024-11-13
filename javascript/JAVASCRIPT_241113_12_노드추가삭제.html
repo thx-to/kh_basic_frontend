@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>노드추가삭제</title>
+</head>
+<body>
+
+  <div id="parent">Parent DIV
+    <div id="child">Child DIV</div>
+  </div>
+  <button onclick="PRC()">Parent Remove Child</button>
+  <button onclick="CRT()">Child Remove Themselves</button>
+
+
+  <script>
+
+    // 노드 추가하기
+    const el1 = document.createElement("a");
+    document.body.appendChild(el1);
+    el1.innerText = "TEST1";
+    const el2 = document.createElement("a");
+    document.body.appendChild(el2);
+    el2.innerText = "TEST2";
+    el2.href = "#";  // 링크 추가하려면 이런식으로
+
+
+    // 노드 삭제하기 1)
+    // 부모 노드(요소)에서 자식 노드(요소)를 제거
+    // 부모 요소를 명시적으로 참조하고 싶을때 사용
+    // 부모 요소를 반드시 알아야 하고, 부모 요소에서 자식 요소를 직접 관리해야 하는 상황에서 사용
+    function PRC() {
+      const parent = document.getElementById("parent");
+      const child = document.getElementById("child");
+      parent.removeChild(child);
+    }
+
+    // 노드 삭제하기 2)
+    // 자식 노드(요소)가 자신을 삭제
+    // 자식 요소에서 호출됨
+    // 부모 요소를 참조할 필요 없이 자식이 자신을 DOM에서 삭제함
+    function CRT() {
+      const child = document.getElementById("child");
+      child.remove();
+    }
+
+  </script>
+</body>
+</html>
