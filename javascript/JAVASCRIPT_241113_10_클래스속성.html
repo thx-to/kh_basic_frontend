@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클래스속성</title>
+  <style>
+    .style-text {
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <p class="default">This is JavaScript!</p>
+  <button id="add">Add Style</button>
+  <button id="remove">Remove Style</button>
+  <button id="toggle">Toggle Style</button>
+  <script>
+    const el = document.querySelector("p");
+    const add = document.getElementById("add");
+    const remove = document.getElementById("remove");
+    const toggle = document.getElementById("toggle");
+
+    // addEventListener(동작, 콜백함수)
+    add.addEventListener("click", () => {
+
+      // class 속성을 조작해 스타일 적용
+      // classList 속성의 add(), remove(), toggle() 메소드 사용
+
+      // add 버튼이 클릭되면 스타일을 넣음
+      el.classList.add("style-text");
+    });
+
+    // remove 버튼이 클릭되면 스타일을 제거함
+    remove.addEventListener("click", () => {
+      el.classList.remove("style-text");
+    });
+
+    // toggle : 두 가지 상태를 번갈아가면서 전환하는 동작 (add와 remove 반복)
+    toggle.addEventListener("click", () => {
+      el.classList.toggle("style-text");
+    });
+
+  </script>
+</body>
+</html>

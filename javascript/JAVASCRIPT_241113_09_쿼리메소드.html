@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿼리메소드</title>
+</head>
+<body>
+  <div class="box-1">
+    <p class="text">text-1</p>
+    <p class="text">text-2</p>
+  </div>
+  <div class="box-2">
+    <p class="text">text-3</p>
+    <p class="text">text-4</p>
+  </div>
+
+  <p id="title">Hello, <span style="display: none;">Javascript!</span></p>
+
+  <script>
+
+    // querySelector("CSS 선택자")
+    const el = document.querySelector(".box-1");
+    console.log(el);
+
+    // querySelectorAll
+    const el2 = document.querySelectorAll(".box-2 .text");
+    console.log(el2);
+
+    // 조작
+    const el3 = document.querySelector(".box-1 .text:nth-of-type(1)");
+    el3.style.fontSize = "2em"; // 스타일 조작하기
+    el3.style.color = "red"; // 스타일 조작하기
+    el3.innerHTML = "해당 태그의 내용을 변경합니다."; // 콘텐츠 조작하기
+
+    const title1 = document.getElementById("title").textContent; // 모든 텍스트, Hello, Javascript!
+    const title2 = document.getElementById("title").innerText; // 표시되는 텍스트, Hello,
+    const title3 = document.getElementById("title").innerHTML; // HTML 태그를 포함한 텍스트, Hello, <span style="display: none;">Javascript!</span>
+
+    console.log(title1);
+    console.log(title2);
+    console.log(title3);
+
+  </script>
+</body>
+</html>
