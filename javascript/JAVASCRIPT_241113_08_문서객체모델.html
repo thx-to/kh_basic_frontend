@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문서객체모델</title>
+</head>
+<body>
+  <h1 id="title">title</h1>
+  <p class="text">text-1</p>
+  <p class="text">text-2</p>
+  <script>
+
+    // id 속성값과 일치하는 요소 노드를 1개만 선택
+    const el = document.getElementById("title");
+    console.log(el);
+
+    // class 속성값과 일치하는 모든 요소를 선택, 유사 배열(배열처럼 찍힘)
+    const classEl = document.getElementsByClassName("text");
+    console.log(classEl);
+    
+    // 유사 배열이기때문에 for 반복문 사용 가능
+    // forEach()를 사용하려면 진짜 배열로 바꿔줘야함..
+    for (let e of classEl) {
+      console.log(e);
+    }
+
+  </script>
+</body>
+</html>
