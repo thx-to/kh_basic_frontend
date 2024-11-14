@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트다루기</title>
+</head>
+<body>
+
+  <input type="text" id="input-box" onfocus="focusEvent()" onblur="blurEvent()">
+
+  <button class="btn1">BTN1</button>
+  <button class="btn2">BTN2</button>
+  <button onclick="btnClick3()">BTN3</button>
+
+  <script>
+
+    // 인라인 방식으로 이벤트 등록하기
+    // 입력창 클릭시 focusEvent() 발생, 외부 클릭시 blurEvent() 발생
+    const inputBox = document.querySelector("#input-box");
+    function focusEvent() {
+      inputBox.style.background = "orange";
+    }
+    function blurEvent() {
+      inputBox.style.background = "green";
+    }
+
+    // 프로퍼티 리스너 방식으로 이벤트 등록하기
+    // 요소 노드에 직접 속성으로 이벤트 등록
+    // 버튼을 클릭했을 때 요소 노드에 등록된 이벤트 속성에 할당된 함수 실행
+    const btnEl1 = document.querySelector(".btn1");
+    btnEl1.onclick = () => {
+      alert("버튼1을 눌렀습니다.");
+    }
+
+  // 이벤트 등록 메소드로 이벤트 등록하기
+  // 자바스크립트에서 많이 사용하는 방식
+   const btnEl2 = document.querySelector(".btn2");
+   btnEl2.addEventListener("click", () => {
+    alert("버튼2를 눌렀습니다.");
+   })
+
+   // button 자체에 onclick으로 해당 함수를 불러주는 방식
+   // 리액트에서 많이 사용하는 방식
+   function btnClick3() {
+    alert("버튼3을 눌렀습니다.");
+   }
+   
+  </script>
+
+</body>
+</html>

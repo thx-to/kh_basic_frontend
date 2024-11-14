@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery 비교예제</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      width: 100vw;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: orange;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      border: 2px solid white;
+      border-radius: 4px;
+      box-shadow: 2px 2px 2px black;
+    }
+    button:active {
+      transform: translateX(2px) translateY(2px);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+    <button id="colorBtn">Change Background</button>
+  </div>
+
+  <!-- jQuery 문법 -->
+   <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script>
+ $(document).ready(function () {
+  const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+  let colorIndex = 0;
+
+  $("#colorBtn").click(function () {
+    $("#container").css("background-color", colors[colorIndex]);
+    colorIndex = (colorIndex + 1) % colors.length;
+  });
+});
+  </script>
+
+
+  <!-- JavaScript 문법 
+  <script>
+    const colorBtn = document.getElementById("colorBtn");
+    const colors = ["red", "orange", "yellow", "green", "blue", "navy", "purple"];
+    let idx = 0;
+    colorBtn.addEventListener("click", () => {
+      document.getElementById("container").style.backgroundColor = colors[idx];
+
+      // 길이(7)만큼 나눈 나머지를 넣음 > 0, 1, 2, 3, 4, 5, 6 (인덱스)
+      idx = (idx + 1) % colors.length;
+    });
+  </script>
+  -->
+
+</body>
+</html>

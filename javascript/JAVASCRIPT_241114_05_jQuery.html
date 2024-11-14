@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript와 jQuery의 비교</title>
+</head>
+<body>
+
+  <div id="myElement">
+    메인
+    <div class="myElements">1번 요소</div>
+    <div class="myElements">2번 요소</div>
+    <div class="myElements">3번 요소</div>
+  </div>
+
+
+  <!-- jQuery CDN(Content Delivery Network) 설정 : jQuery를 사용하기 위해 HTML 문서에서 jQuery 파일 불러오기 -->
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script>
+    
+    // JavaScript의 querySelector 사용하기
+    const el1 = document.querySelector("#myElement");
+    console.log(el1.innerText);
+
+    // jQuery 사용하기
+    const $el1 = $('#myElement');
+    console.log($el1.text());
+
+    // JavaScript의 querySelectorAll 사용하기
+    const el2 = document.querySelectorAll(".myElements"); 
+    el2.forEach(element => console.log(element.innerText));
+
+    // jQuery 사용하기
+    const $el2 = $('.myElements');
+    console.log($el2.text());
+
+  </script>
+
+</body>
+</html>
