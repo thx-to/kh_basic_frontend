@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>배경색바꾸기</title>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .btnbox {
+      margin-top: 10vh;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    button {
+      width: 113px;
+      height: 35px;
+      font-size: 10.5px;
+      font-weight: 500;
+      margin: 0 3px;
+      color: white;
+      cursor: pointer;
+      border: none;
+      border-radius: 3px;
+    }
+    button:active {
+      transform: translateX(2px) translateY(2px);
+    }
+    #greenBtn {
+      background-color: green;
+    }
+    #orangeBtn {
+      background-color: orange;
+    }
+    #purpleBtn {
+      background-color: purple;
+    }
+    #container {
+      width: 350px;
+      margin: 0 auto;
+      height: 200px;
+      background-color: white;
+      border-radius: 10px;
+      border: 2px solid rgb(199, 198, 198);
+      color: white;
+      text-align: center;
+      align-content: center;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="btnbox">
+  <button id="greenBtn" onfocus="greenEvent()" onclick="greenBtnF()">Green</button>
+  <button id="orangeBtn" onfocus="orangeEvent()" onclick="orangeBtnF()">Orange</button>
+  <button id="purpleBtn" onfocus="purpleEvent()" onclick="purpleBtnF()">Purple</button>
+  </div>
+  <div id="container"></div>
+
+
+  <script>
+
+    // 1) 인라인 방식으로 이벤트 등록
+    /*
+    const greenBtn = document.querySelector("#greenBtn");
+    function greenEvent() {
+      document.getElementById("container").style.backgroundColor = "green";
+    }
+    const orangeBtn = document.querySelector("#orangeBtn");
+    function orangeEvent() {
+      document.getElementById("container").style.backgroundColor = "orange";
+    }
+    const purpleBtn = document.querySelector("#purpleBtn");
+    function purpleEvent() {
+      document.getElementById("container").style.backgroundColor = "purple";
+    }
+    */
+
+    // 2) 프로퍼티 리스너 방식으로 이벤트 등록
+    /*
+    const greenBtn = document.querySelector("#greenBtn");
+    greenBtn.onclick = () => {
+      document.getElementById("container").style.backgroundColor = "green";
+    }
+    const orangeBtn = document.querySelector("#orangeBtn");
+    orangeBtn.onclick = () => {
+      document.getElementById("container").style.backgroundColor = "orange";
+    }
+    const purpleBtn = document.querySelector("#purpleBtn");
+    purpleBtn.onclick = () => {
+      document.getElementById("container").style.backgroundColor = "purple";
+    }
+      */
+
+    // 3) 이벤트 등록 메소드로 이벤트 등록 
+    /*
+    const greenBtn = document.getElementById("greenBtn");
+    greenBtn.addEventListener("click", () => {
+      document.getElementById("container").style.backgroundColor = "green";
+    });
+    const orangeBtn = document.getElementById("orangeBtn");
+    orangeBtn.addEventListener("click", () => {
+      document.getElementById("container").style.backgroundColor = "orange";
+    });
+    const purpleBtn = document.getElementById("purpleBtn");
+    purpleBtn.addEventListener("click", () => {
+      document.getElementById("container").style.backgroundColor = "purple";
+    });
+    */
+
+    // 4) button 자체에 onclick으로 해당 함수를 불러주는 방식
+    function greenBtnF() {
+      clearText();
+      document.getElementById("container").style.backgroundColor = "green";
+      const greenText = document.createElement("p");
+      greenText.innerText = "Background Color Green";
+      document.querySelector("#container").appendChild(greenText);
+    }
+    function orangeBtnF() {
+      clearText();
+      document.getElementById("container").style.backgroundColor = "orange";
+      const orangeText = document.createElement("p");
+      orangeText.innerText = "Background Color Orange";
+      document.querySelector("#container").appendChild(orangeText);
+    }
+    function purpleBtnF() {
+      clearText();
+      document.getElementById("container").style.backgroundColor = "purple";
+      const purpleText = document.createElement("p");
+      purpleText.innerText = "Background Color Purple";
+      document.querySelector("#container").appendChild(purpleText);
+    }
+
+    // 다른 버튼 클릭시 기존 문구 지워줌
+      function clearText() {
+      const container = document.getElementById("container");
+      const existingText = container.querySelectorAll("p");
+      existingText.forEach(text => text.remove());
+    }
+
+  </script>
+
+
+</body>
+</html>

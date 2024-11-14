@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>버튼 클릭시 상세 설명 표시 및 닫기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+        font-family: "Noto Sans KR", sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+    #container {
+      margin: 10vh auto;
+      width: 300px;
+      height: 100vh;
+      background-image: url(JAVASCRIPT_241114_09_요소샘플/NJ.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+    }
+    #textContainer {
+      display: none;
+      width: 300px;
+      position: absolute;
+      top: calc(10vh + 300px);
+      font-size: 12px;
+      line-height: 160%;
+      font-weight: 400;;
+    }
+    button {
+      font-size: 10px;
+      width: 70px;
+      height: 21px;
+      text-align: center;
+      align-items: center;
+      margin: 8px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(228, 228, 228, 0.8);
+      cursor: pointer;
+    }
+    #closeBtn {
+      margin-left: 0;
+    }
+    .open {
+      position: relative;
+      left: 0;
+      top: 265px;
+    }
+    h3 {
+      font-size: 13px;
+      margin-top: 13px;
+      margin-bottom: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <button id="openBtn" class="open" onclick="isDetail(true)">상세 설명 보기</button>
+    <div id="textContainer">
+      <h3>New Jeans</h3>
+      <p>대중음악은 일상과 초근접해 있는 문화이기 때문에 마치 매일 입는 옷과 같다. 특히 진(Jean)은 시대를 불문해 남녀노소 모두에게 사랑받아 온 아이템이다. 뉴진스(NewJeans)에는 매일 찾게 되고 언제 입어도 질리지 않는 진처럼 시대의 아이콘이 되겠다는 포부와 New Genes, 즉 새로운 시대를 열겠다는 각오도 동시에 담겨 있다.</p>
+      <button id="closeBtn" onclick="isDetail(false)">상세 설명 닫기</button>
+    </div>
+  </div>
+  <script>
+    function isDetail(isDetail) {
+      if (isDetail) {
+        document.querySelector("#textContainer").style.display = "block";
+        document.querySelector("#openBtn").style.display = "none";
+      } else {
+        document.querySelector("#textContainer").style.display = "none";
+        document.querySelector("#openBtn").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트취소하기</title>
+</head>
+<body>
+  
+<a href="https://naver.com">NAVER</a>
+<a href="https://google.com">GOOGLE</a>
+
+<script>
+  const aEls = document.querySelectorAll("a");
+  aEls.forEach((el) => {
+    el.addEventListener("click", event => {
+
+      // 원래 가진 이벤트 특성을 지워줌
+      // a태그의 href, 링크 연결이 되지 않음
+      event.preventDefault();
+    });
+  });
+</script>
+
+</body>
+</html>
