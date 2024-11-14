@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스크롤이동</title>
+  <style>
+   body {
+            width: 5000px;
+            height: 5000px;
+        }
+        .btn1 {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+        .btn2 {
+            position: fixed;
+            top: 10px;
+            left: 200px;
+        }
+  </style>
+</head>
+<body>
+  <div>
+    <button class="btn1" onclick="sTo()">scrollTo(100, 200)</button>
+    <button class="btn2" onclick="sBy()">scrollBy(100, 200)</button>
+  </div>
+  <script>
+    function sTo(){
+
+      // scrollTo는 특정 좌표로
+			window.scrollTo(100, 200);
+      // window.scrollTo({left:100, top:200});
+    }
+
+    // scrollBy는 현재 위치 기준으로
+    function sBy(){
+			window.scrollBy(100, 200);
+      // window.scrollBy({left:100, top:200});
+    }
+  </script>
+</body>
+</html>
