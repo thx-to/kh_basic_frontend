@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메뉴추가하기</title>
+</head>
+<body>
+  <div id="menu">
+
+  </div>
+  <script>
+
+    // 먼저 선택해놓고
+    const menuEl = document.querySelector("#menu");
+
+    // ul태그를 만들어야 함
+    const menuList = document.createElement("ul");
+
+    // ul 내부 리스트 아이템
+    const menuItem1 = document.createElement("li");
+    const menuItem2 = document.createElement("li");
+    const menuItem3 = document.createElement("li");
+    const menuItem4 = document.createElement("li");
+    const menuItem5 = document.createElement("li");
+
+    // 아이템을 리스트에 추가
+    menuList.appendChild(menuItem1);
+    menuList.appendChild(menuItem2);
+    menuList.appendChild(menuItem3);
+    menuList.appendChild(menuItem4);
+    menuList.appendChild(menuItem5);
+
+    // 리스트를 menuEl에 추가
+    menuEl.appendChild(menuList);
+
+    // 아이템에 값 넣어주기
+    menuItem1.innerText = "KONA";
+    menuItem2.innerText =  "SELTOS";
+    menuItem3.innerText = "EV3";
+    menuItem4.innerText = "CASPER";
+    menuItem5.innerText = "VENUE";
+
+  </script>
+</body>
+</html>

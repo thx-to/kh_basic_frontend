@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체크박스 다루기</title>
+</head>
+<body>
+
+  <form action="#">
+    <lable><input type="checkbox" value="apple">apple</lable><br>
+    <lable><input type="checkbox" value="banana">banana</lable><br>
+    <lable><input type="checkbox" value="carrot">carrot</lable><br>
+    <lable><input type="checkbox" value="durian">durian</lable>
+  </form>
+
+  <script>
+    const checkboxEl = document.querySelectorAll("[type='checkbox']");
+
+    // for (let i = 0; i < checkboxEl.length; i++) {
+    //   checkboxEl[i].checked = true;
+    // }
+    checkboxEl.forEach((e) => (e.checked = true));
+  </script>
+
+</body>
+</html>

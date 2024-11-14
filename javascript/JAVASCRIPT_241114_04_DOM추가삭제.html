@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>입력한 항목 클릭하여 삭제하기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+        font-family: "Noto Sans KR", sans-serif;
+    }
+
+    #container {
+      width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    input[type="text"] {
+      margin-top: 10px;
+      width: 370px;
+      height: 24px;
+      padding-left: 30px;
+    }
+    hr { clear:both; display:none; }
+
+    ul { list-style:none; padding-top:10px;}
+
+    li { line-height: 2.5; }
+
+    li:hover { cursor:pointer;}
+    
+    button {
+      background-color: #222;
+      color: white;
+      width: 90px;
+      height: 30px;
+      border: none;
+      border-radius: 3px;
+      font-size: 11.5px;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="container">
+
+    <h1>DOM 추가/삭제</h1>
+    <p>공부할 과목을 기록해 보세요.</p>
+    <p>공부가 끝난 과목은 클릭해서 삭제할 수 있습니다.</p>
+
+    <input type="text" id="subject" autofocus>
+    <button onclick="newRegister()">추가</button>
+
+    <hr>
+
+    <ul id="itemList">
+    </ul>
+
+  </div>
+
+  <script>
+    function newRegister() {
+
+      // 해당하는 input 요소를 찾음 (input id="subject")
+      const subject = document.querySelector("#subject");
+      // 새로운 항목을 추가하기 위해 li태그 생성
+      const newItem = document.createElement("li");
+      // 생성된 li태그를 추가하기 위해 부모 태그를 선택
+      const itemList = document.querySelector("#itemList");
+      // 새로운 항목의 내용 추가
+      newItem.innerHTML = subject.value;
+      // 추가함, appendChild 써도 됨
+      // 자식 노드 중 첫번째(인덱스 0) 노드 앞에 추가
+      itemList.insertBefore(newItem, itemList.childNodes[0]);
+
+      // 입력 필드에 남아 있는 텍스트 비우기
+      subject.value = "";
+      // 해당 아이템을 더블클릭하여 삭제하기
+      newItem.addEventListener("dblclick", () => {
+        itemList.removeChild(newItem)
+      })
+
+    }
+  </script>
+
+</body>
+</html>
