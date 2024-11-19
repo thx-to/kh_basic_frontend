@@ -1,4 +1,24 @@
-// 컴포넌트는 함수형 컴포넌트와 클래스형 컴포넌트가 있음
-// 현재는 함수형 컴포넌트만 사용됨
-// 예전에는 상태 관리와 생명주기 관리를 위해서 클래스형 컴포넌트를 사용했지만
-// v16.8 이후부터 함수형 컴포넌트에서도 상태 관리와 생명주기 관리가 가능해짐
+import { Component } from "react";
+
+class Counter extends Component {
+    constructor(props) {
+        super(props);
+		// state의 초기값 설정하기
+        this.state = {
+            number: 0,
+            fixedNumber: 0
+        };
+    }
+    render() {
+        const {number, fixedNumber} = this.state; // state 조회
+        return (
+            <div>
+                <h1>{number}</h1>
+                <h2>바뀌지 않는 값 : {fixedNumber}</h2>
+                {/* this.setState를 사용하여 state에 새로운 값을 넣을 수 있습니다. */}
+                <button onClick = {()=>{this.setState({number: number + 1})}}>+1</button>
+            </div>
+        );
+    }
+}
+export default Counter;
