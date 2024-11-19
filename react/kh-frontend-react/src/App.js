@@ -36,13 +36,13 @@ function App() {
       <BoxComponent>📦 BOX 1</BoxComponent>
       <BoxComponent>📦 BOX 2</BoxComponent>
       <Counter />
+      */}
       <Say />
       <Clock />
       <EventPractice />
       <DropdownComponent />
       <RadioButton />
       <TableMap />
-      */}
     </>
   );
 }

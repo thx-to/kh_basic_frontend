@@ -25,7 +25,7 @@ const DropdownComponent = () => {
         <option value="🍎">　　APPLE</option>
         <option value="🍌">　　BANANA</option>
         <option value="🍇">　　GRAPE</option>
-        <option value="🍉">　WATERMELON</option>
+        <option value="🍉">　　WATERMELON</option>
 
         {/* 배열로 넣기
         <option value={fruits[0]}>사과</option>

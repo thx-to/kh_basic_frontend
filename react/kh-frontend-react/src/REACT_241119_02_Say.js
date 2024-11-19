@@ -49,7 +49,16 @@ const Button2 = styled.button`
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  transition: all 0.2s ease-in;
+  &:hover {
+    background-color: #fff;
+    color: ${(props) => props.color || "black"};
+    border: 2px solid ${(props) => props.color || "black"};
+    cursor: pointer;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
 `;
 
 const Say = () => {
