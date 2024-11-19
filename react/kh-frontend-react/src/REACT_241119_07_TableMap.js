@@ -94,8 +94,8 @@ const TableMap = () => {
           </tr>
         ))}
     </Table>
-  );
 
+  );
 };
 
 
