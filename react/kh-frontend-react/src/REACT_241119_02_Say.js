@@ -81,7 +81,7 @@ const Say = () => {
         <Button1 onClick={onClickEnter}>입장</Button1>
         <Button1 onClick={onClickLeave}>퇴장</Button1>
       </BtnContainer>
-      {/* 스타일 객체 대신 프로퍼티를 위해서는 중괄호를 하나 더 넣어줌 */}
+      {/* 스타일 객체를 생성하는 대신 HTML 요소 렌더링 및 동적 스타일링을 하기 위해서 중괄호를 하나 더 넣어줌 */}
       {/* 객체를 만들지 않고, 구조 분해를 해서 따로 넣어줌 */}
       <h1 style={{ color: value }}>{message}</h1>
       <BtnContainer>
