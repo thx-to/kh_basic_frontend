@@ -41,8 +41,8 @@ function App() {
       <EventPractice />
       <DropdownComponent />
       <RadioButton />
-      */}
       <TableMap />
+      */}
     </>
   );
 }

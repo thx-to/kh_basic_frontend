@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const DropdownComponent = () => {
 
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("NONE");
 
   const handleChange = e => {
     setSelectedValue(e.target.value);
@@ -18,21 +18,20 @@ const DropdownComponent = () => {
 
       {/* 이벤트에 대한 상태관리를 useState로 하겠다 */}
       <select value={selectedValue} onChange={handleChange}>
-        <option value="" disabled>
+        <option value="NONE" disabled>
           👉 SELECT FRUIT
         </option>
 
-        <option value="🍎">🍎 APPLE</option>
-        <option value="🍌">🍌 BANANA</option>
-        <option value="🍇">🍇 GRAPE</option>
-        <option value="🍉">🍉 WATERMELON</option>
+        <option value="🍎">　　APPLE</option>
+        <option value="🍌">　　BANANA</option>
+        <option value="🍇">　　GRAPE</option>
+        <option value="🍉">　WATERMELON</option>
 
         {/* 배열로 넣기
         <option value={fruits[0]}>사과</option>
         <option value={fruits[1]}>바나나</option>
         <option value={fruits[2]}>포도</option>
         <option value={fruits[3]}>수박</option> */}
-
       </select>
       <p>SELECTED FRUIT : {selectedValue}</p>
     </>

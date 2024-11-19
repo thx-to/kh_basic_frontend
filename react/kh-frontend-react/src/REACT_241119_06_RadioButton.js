@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const RadioButton = () => {
 
-  const [selectedValue, setSelectedValue] = useState("apple");
+  const [selectedValue, setSelectedValue] = useState("NONE");
 
   const handleChange = e => {
     setSelectedValue(e.target.value);
@@ -20,7 +20,7 @@ const RadioButton = () => {
           value="🍓"
           onChange={handleChange}
         />
-        🍓 STRAWBERRY
+        STRAWBERRY
       </label>
       <br />
       <label htmlFor="orange">
@@ -31,7 +31,7 @@ const RadioButton = () => {
           value="🍊"
           onChange={handleChange}
         />
-        🍊 ORANGE
+        ORANGE
       </label>
       <br />
       <label htmlFor="pineapple">
@@ -42,7 +42,7 @@ const RadioButton = () => {
           value="🍍"
           onChange={handleChange}
         />
-        🍍 PINEAPPLE
+        PINEAPPLE
       </label>
       <br />
       <label htmlFor="kiwi">
@@ -53,7 +53,7 @@ const RadioButton = () => {
           value="🥝"
           onChange={handleChange}
         />
-        🥝 KIWI
+        KIWI
       </label>
       <br />
       <p>SELECTED FRUIT : {selectedValue}</p>
