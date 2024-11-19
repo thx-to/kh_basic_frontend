@@ -8,13 +8,12 @@ const EventPractice = () => {
   // 한줄짜리 코드라 중괄호 생략 가능
   const changeMsg = e => setMessage(e.target.value);
   const onChangeUserName = e => setUserName(e.target.value);
+
   const onClick = () => {
     alert(`${userName} : ${message}`);
-
     // 입력창 비우기
     setUserName("");
     setMessage("");
-
   }
 
   // Enter Key가 입력되면 onClick() 호출
@@ -29,7 +28,6 @@ const EventPractice = () => {
     <input type="text" placeholder="NAME" onChange={onChangeUserName} value={userName} />
     <input type="text" placeholder="WRITE ANYTHING" onChange={changeMsg} onKeyDown={onKeyPress} value={message} />
     <button onClick={onClick}>CONFIRM</button>
-    
     </>
   );
 };
