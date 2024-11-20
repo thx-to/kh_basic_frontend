@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const TodoList = () => {
 
-
   // useState 배열에 객체 4개를 넣고 시작
   // names : 할 일 목록을 저장하는 상태
   // names 배열의 초기값에 아래 4개의 객체가 이미 들어가 있음
