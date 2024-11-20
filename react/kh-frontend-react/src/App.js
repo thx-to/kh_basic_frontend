@@ -13,6 +13,8 @@ import EventPractice from "./REACT_241119_04_EventPractice";
 import DropdownComponent from "./REACT_241119_05_DropdownComponent";
 import RadioButton from "./REACT_241119_06_RadioButton";
 import TableMap from "./REACT_241119_07_TableMap";
+import UserList from "./REACT_241120_01_UserList";
+import TodoList from "./REACT_241120_02_TodoList";
 
 // REACT_241118_01_JSX문법.js에서 Default로 export했던거랑 Mapping됨
 // 하위컴포넌트를 import해오기
@@ -36,13 +38,15 @@ function App() {
       <BoxComponent>📦 BOX 1</BoxComponent>
       <BoxComponent>📦 BOX 2</BoxComponent>
       <Counter />
-      */}
       <Say />
       <Clock />
       <EventPractice />
       <DropdownComponent />
       <RadioButton />
       <TableMap />
+      <UserList />
+      */}
+      <TodoList />
     </>
   );
 }
