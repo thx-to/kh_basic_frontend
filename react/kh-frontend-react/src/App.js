@@ -15,6 +15,8 @@ import RadioButton from "./REACT_241119_06_RadioButton";
 import TableMap from "./REACT_241119_07_TableMap";
 import UserList from "./REACT_241120_01_UserList";
 import TodoList from "./REACT_241120_02_TodoList";
+import HooksPractice from "./REACT_241120_03_HooksPractice";
+import InfoEffect from "./REACT_241120_04_InfoEffect";
 
 // REACT_241118_01_JSX문법.js에서 Default로 export했던거랑 Mapping됨
 // 하위컴포넌트를 import해오기
@@ -45,8 +47,10 @@ function App() {
       <RadioButton />
       <TableMap />
       <UserList />
-      */}
       <TodoList />
+      <HooksPractice />
+      <InfoEffect />
+      */}
     </>
   );
 }

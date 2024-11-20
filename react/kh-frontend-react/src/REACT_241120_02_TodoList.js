@@ -1,17 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TodoList = () => {
-
   // useState 배열에 객체 4개를 넣고 시작
   // names : 할 일 목록을 저장하는 상태
   // names 배열의 초기값에 아래 4개의 객체가 이미 들어가 있음
   // 각 항목은 id와 text 값을 가진 객체로 구성되어 있음
-  const [names, setNames] = useState([
-    {id: 1, text: "HTML Practice"},
-    {id: 2, text: "CSS Practice"},
-    {id: 3, text: "JavaScript Practice"},
-    {id: 4, text: "React Project"},
-  ]);
+  // useState를 초기화할 때 로컬 스토리지에서 "names" 데이터를 불러옴
+  const [names, setNames] = useState(() => {
+    // useState 안에서 코딩
+    // 로컬 스토리지에서 "names" 데이터를 가져옴
+    const storedNames = localStorage.getItem("names");
+
+    // storedNames가 참(내용이 있으면)이면 JSON.parse를 해라 (JSON 문자열을 객체로 변환, 역직렬화)
+    // storedNames가 거짓(내용이 없으면)이면 아니면 기본값 배열(아래)을 반환
+    return storedNames
+      ? JSON.parse(storedNames)
+      : [
+          { id: 1, text: "HTML Practice" },
+          { id: 2, text: "CSS Practice" },
+          { id: 3, text: "JavaScript Practice" },
+          { id: 4, text: "React Project" },
+        ];
+  });
+
+  // useEffect의 기본 구조: 첫 번째 매개 변수 함수(부수 효과 정의), 두 번째 매개 변수 의존성 배열(배열에 포함된 값이 변경될 때만 첫 번째 함수 실행)
+  // 두 번째 매개 변수가 빈 배열일 경우 컴포넌트가 처음 마운트될 때만 실행되고 이후에는 실행되지 않음
+  // 배열이 없으면 렌더링이 일어날 때마다 실행됨
+  // names가 변경될 때마다 로컬 스토리지에 저장
+  useEffect(() => {
+    // names 배열을 JSON 문자열로 변환하여 로컬 스토리지에 저장 (직렬화)
+    localStorage.setItem("names", JSON.stringify(names));
+
+    // useEffect의 의존성 배열 : [names]는 names가 변경될 때만 실행되도록 보장, 상태 업데이트가 효율적으로 이루어지도록 도와줌
+  }, [names]);
 
   // inputText : 사용자가 입력한 텍스트를 저장하는 상태
   // input 필드에 사용자가 입력한 값이 이 상태에 저장됨
@@ -33,11 +54,10 @@ const TodoList = () => {
   // input에 값 입력 > onChange 이벤트 발생 > 리액트는 이벤트 객체 e를 핸들러 함수 onChange에 전달
   // > e.target은 이벤트가 발생한 input 요소 참조 > e.target.value는 사용자가 입력한 값을 가져옴
   // > setInputText로 상태 업데이트
-  const onChange = e => setInputText(e.target.value);
+  const onChange = (e) => setInputText(e.target.value);
 
   // onClick이 일어났을 때(버튼 클릭시) 입력받은 내용 추가(id, text)해서 새로운 배열을 만들고 setNames에 넣으니까 렌더링되면서 내용이 바뀜
   const onClick = () => {
-
     // concat을 안넣고 names에 함수를 넣으면 들어는 가는데 불변성의 원칙에 위배됨 (주소가 달라짐)
     // concat으로 기존 names를 업데이트(새 배열 반환) > 렌더링이 일어남
     // concat 또는 전개연산자(...) 사용
@@ -71,13 +91,18 @@ const TodoList = () => {
     // 2~3개 하는 정도는 괜찮은데, 전체적으로 썩 좋은 구조는 아님
     // 입력창 초기화
     setInputText("");
-
   };
 
+  const onRemove = (id) => {
+    // map은 10개를 넣으면 10개가 변환되어 나오고, filter는 조건에 맞는 것만 나와서 새로운 배열 생성
+    // name.id가 id와 같지 않으면 (같으면 제거함, 더블클릭으로 구현)
+    const nextNames = names.filter((name) => name.id !== id);
+    setNames(nextNames);
+  };
 
-    // 그려 주는 부분
-    return (
-      <>
+  // 그려 주는 부분
+  return (
+    <>
       {/* onChange 함수가 입력 필드에 적용되어, 사용자가 입력할 때마다 inputText 상태 업데이트 */}
       <input value={inputText} onChange={onChange} />
 
@@ -86,14 +111,16 @@ const TodoList = () => {
 
       {/* names 배열의 항목을 map을 이용해 렌더링, 각 항목은 li 태그로 출력되며 key={name.id}로 각 항목을 고유하게 식별 */}
       <ul>
-        
         {/* name => () 에 소괄호를 넣는 이유는 자동 반환이 일어나기 때문, 중괄호를 넣으면 return문 필요 */}
-        {names && names.map(name => (
-          <li key={name.id}>{name.text}</li>
-        ))}
+        {names &&
+          names.map((name) => (
+            <li key={name.id} onDoubleClick={() => onRemove(name.id)}>
+              {name.text}
+            </li>
+          ))}
       </ul>
-      </>
-    );
+    </>
+  );
 };
 
 // 전체 동작
