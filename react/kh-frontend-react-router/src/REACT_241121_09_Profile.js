@@ -12,10 +12,13 @@ const ProfileContainer = styled.div`
 box-sizing: border-box;
   width: 500px;
   height: 150px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 10px;
   text-align: center;
   background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 const data = {
   DEV1: {
