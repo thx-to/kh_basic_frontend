@@ -1,8 +1,10 @@
 import './App.css';
+import News from './pages/REACT_241122_10_News';
 
 function App() {
   return (
     <>
+    <News />
     </>
   );
 }
