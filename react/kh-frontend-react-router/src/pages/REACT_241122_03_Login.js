@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Container, StyledInput, StyledButton } from "../styles/REACT_241122_05_CommonStyle";
 
 const Login = () => {
 
@@ -36,30 +37,30 @@ const Login = () => {
   };
 
   return (
-    <>
-      <input
+    <Container>
+      <StyledInput
         id="inputID"
         placeholder="아이디를 입력하세요."
         onChange={onChangeID}
-      ></input>
+      ></StyledInput>
       <br />
-      <input
+      <StyledInput
         id="inputPW" type="password"
         placeholder="비밀번호를 입력하세요."
         onChange={onChangePW}
-      ></input>
+      ></StyledInput>
       <br />
       <br />
       {isID && isPW ? (
-        <button onClick={onClickLogin}>
+        <StyledButton onClick={onClickLogin}>
           확인
-        </button>
+        </StyledButton>
       ) : (
-        <button disabled onClick={onClickLogin}>
+        <StyledButton disabled onClick={onClickLogin}>
           확인
-        </button>
+        </StyledButton>
       )}
-    </>
+    </Container>
   );
 
 };

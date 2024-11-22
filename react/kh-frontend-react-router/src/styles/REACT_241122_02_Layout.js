@@ -14,9 +14,9 @@ const Header = styled.header`
 `;
 
 const Main = styled.main`
-  margin-top: 100px;
+  padding-top: 100px;
   text-align: center;
-  height: calc(100vh - 200px);
+  height: calc(100vh - 100px);
 `;
 
 const Footer = styled.footer`
