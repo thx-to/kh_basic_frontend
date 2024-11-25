@@ -40,4 +40,7 @@ export const StyledButton = styled.button`
   font-size: 15px;
   border-radius: 18px;
   border: orange;
+  &:hover {
+    background-color: black;
+  }
 `;

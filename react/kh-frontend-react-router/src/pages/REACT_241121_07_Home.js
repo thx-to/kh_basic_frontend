@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 
+// 사용자가 context를 만들기 위해(createContext) 만든 컴포넌트
+import { UserContext } from "../context/REACT_241125_02_UserStore";
+
+// 리액트가 제공하는 훅
+import { useContext } from "react";
+
 const Home = () => {
+
+  const {userID, userPassword} = useContext(UserContext);
+
   return (
     <>
       <h1>여기는 Home 입니다.</h1>
@@ -25,6 +34,8 @@ const Home = () => {
           <Link to="/articles">게시판 목록</Link>
         </li>
       </ul>
+      <p>ID : {userID}</p>
+      <p>pw : {userPassword}</p>
     </>
   );
 };

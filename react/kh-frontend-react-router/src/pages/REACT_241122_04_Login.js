@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Container, StyledInput, StyledButton } from "../styles/REACT_241122_05_CommonStyle";
+import { useContext, useState } from "react";
+import { Container, StyledInput, StyledButton } from "../styles/REACT_241122_06_CommonStyle";
+
+// default export한게 아니기 때문에 중괄호를 넣어줘야 함
+import { UserContext } from "../context/REACT_241125_02_UserStore";
 
 const Login = () => {
 
@@ -15,14 +18,26 @@ const Login = () => {
   // useNavigate라는, 페이지 이동을 위한 객체 만들기
   const navigate = useNavigate();
   
+  // useContext 훅으로 사용자(나)가 만든 UserContext의 전역 상태 값에 접근 (4가지 value 값)
+  const context = useContext(UserContext);
+
+  // 4개 값 중 2개를 구조분해해서 빼옴
+  const {setUserID, setUserPassword} = context;
+
   const onChangeID = e => {
     // 주의) inputID는 마지막 입력값이 반영(업데이트)이 안된 상태라서 setInputID로 비교해야 함
     setInputID(e.target.value);
+
+    // 값이 바뀌면 이 값을 사용하는 곳에서 리렌더링이 일어남
+    // 전역 상태 값을 갱신해줌
+    setUserID(e.target.value);
+
     e.target.value.length >= 5 ? setIsID(true) : setIsID(false);
   };
 
   const onChangePW = e => {
     setInputPW(e.target.value);
+    setUserPassword(e.target.value);
     e.target.value.length >= 5 ? setIsPW(true) : setIsPW(false);
   };
 
@@ -33,7 +48,7 @@ const Login = () => {
       navigate("/home");
     } else {
       alert("아이디 혹은 비밀번호를 잘못 입력하셨습니다.");
-    };
+    }
   };
 
   return (
