@@ -22,9 +22,10 @@ const NewsListBlock = styled.div`
 `;
 
 
-const NewsList = () => {
+const NewsList = ({category}) => {
 
   // 데이터 연동하기
+  // 값이 없다면 빈 문자열(null) 반환
   const [articles, setArticles] = useState(null);
 
   // useEffect에서 콜백함수를 부를 때
@@ -38,8 +39,9 @@ const NewsList = () => {
   useEffect (() => {
     const fetchData = async() => {
       try {
+        const query = category === "all" ? "all" : `category=${category}`;
         const response = await axios.get(
-          "https://newsapi.org/v2/top-headlines?country=us&apiKey=1fa129beaf724b7f80e144ac725c3f7f"
+          `https://newsapi.org/v2/top-headlines?country=us&${query}&apiKey=1fa129beaf724b7f80e144ac725c3f7f`
         );
         setArticles(response.data.articles);
       } catch (e) {
@@ -47,11 +49,12 @@ const NewsList = () => {
       };
     };
       fetchData();
-    }, []);
+      // 의존성 배열이 비어 있으면 마운트 시점(컴포넌트 최초 렌더링 이후)에 호출
+    }, [category]);
 
   return (
   <NewsListBlock>
-    {/* 들어온 데이터가 있으니까 그 개수만큼 돌림 */}
+    {/* 들어온 데이터가 있으니까 그 개수만큼 돌림 (articles && 조건부가 없다면 값이 없으면 죽음) */}
     {articles && articles.map((article, index) => (
       <NewsItems key={index} article={article} />
     ))}
