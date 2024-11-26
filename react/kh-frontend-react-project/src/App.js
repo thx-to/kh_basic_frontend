@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
 import UserStore from './context/UserStore';
-import Login from './pages/signup/Login';
-import Signup from './pages/signup/Signup';
+import Login from './pages/signup/Login_MINE';
+import Signup from './pages/signup/Signup_MINE';
 
 function App() {
   return (

@@ -1,274 +1,167 @@
-import { Button, TextField } from "@material-ui/core";
-import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserStore";
+import Input from "../../components/InputComponent";
+import Button from "../../components/ButtonComponent";
+import { Container, Items } from "../../components/SignupComponent";
 import AxiosApi from "../../api/AxiosApi";
 
-// Container 스타일 설정
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f1f1f1;
-`;
-
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 50vw;
-  min-width: 400px;
-  height: 70vh;
-  min-height: 400px;
-  background-color: white;
-  border-radius: 30px;
-  box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.05);
-`;
-
-// Material-UI TextField 재정의
-const StyledTextField = styled(TextField)`
-  && {
-    margin-top: 10px;
-    width: 300px;
-    .MuiOutlinedInput-root {
-      border-radius: 50px;
-    }
-  }
-`;
-
-// Material-UI Button 재정의
-const StyledButton = styled(Button)`
-  && {
-    margin-top: 20px;
-    width: 300px;
-    height: 50px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-  }
-`;
-
-const Span = styled.span`
-  width: 300px;
-  margin-left: 20px;
-  font-size: 0.8em;
-  color: gray;
-`;
-
 const Signup = () => {
-
   const navigate = useNavigate();
+  // 키보드 입력
+  const [inputPw, setInputPw] = useState("");
+  const [inputConPw, setInputConPw] = useState("");
+  const [inputName, setInputName] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
 
-  const [formData, setFormData] = useState({
-    id: "",
-    pw: "",
-    confirmPW: "",
-    name: "",
-  });
+  // 오류 메시지
+  const [pwMessage, setPwMessage] = useState("");
+  const [conPwMessage, setConPwMessage] = useState("");
+  const [mailMessage, setMailMessage] = useState("");
 
-  const [validMsg, setValidMsg] = useState({
-    id: "",
-    pw: "",
-    confirmPW: "",
-  });
+  // 유효성 검사
+  const [isMail, setIsMail] = useState(false);
+  const [isPw, setIsPw] = useState(false);
+  const [isConPw, setIsConPw] = useState(false);
+  const [isName, setIsName] = useState(false);
 
-  const [isValid, setIsValid] = useState({
-    id: false,
-    pw: false,
-    confirmPW: false,
-    name: false,
-  })
-
-  const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    setFormData((prevData) => ({...prevData, [name]: value}));
-
-    switch (name) {
-      case "id" :
-        validID(value);
-        break;
-      case "pw" :
-        validPW(value);
-        break;
-      case "confirmPW" :
-        validConfirmPW(value);
-        break;
-      case "name" :
-        setIsValid((prevValid) => ({ ...prevValid, name: value.trim().length > 0 }));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const validID = (id) => {
-    const idRegex = /^\w{8,20}$/;
-    if (!idRegex.test(id)) {
-      setValidMsg((prevMsg) => ({
-        ...prevMsg,
-        id: "아이디는 영문자, 숫자, 언더바(_)만 포함할 수 있으며,\n8자 이상 20자 이하여야 합니다.",
-      }));
-      setIsValid((prevValid) => ({ ...prevValid, id: false}));
+  const onChangeMail = (e) => {
+    setInputEmail(e.target.value);
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(e.target.value)) {
+      setMailMessage("이메일 형식이 올바르지 않습니다.");
+      setIsMail(false);
     } else {
-      memberRegCheck(id);
+      setMailMessage("올바른 형식 입니다.");
+      setIsMail(true);
+      memberRegCheck(e.target.value);
     }
   };
-
-  const validPW = (pw) => {
-    const pwRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!pwRegex.test(pw)) {
-      setValidMsg((prevMsg) => ({
-        ...prevMsg,
-        pw: "비밀번호는 영문 대소문자, 숫자, 특수문자를\n모두 포함하여 8자리 이상이어야 합니다.",
-      }));
-      setIsValid((prevValid) => ({ ...prevValid, pw: false}));
+  const onChangePw = (e) => {
+    //const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setInputPw(passwordCurrent);
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPwMessage("숫자+영문자 조합으로 8자리 이상 입력해주세요!");
+      setIsPw(false);
     } else {
-      setValidMsg((prevMsg) => ({
-        password: "안전합니다."
-      }));
-      setIsValid((prevValid) => ({ ...prevValid, password: true}));
+      setPwMessage("안전한 비밀번호에요 : )");
+      setIsPw(true);
     }
   };
-
-  const validConfirmPW = (confirmPW) => {
-    if (confirmPW !== formData.pw) {
-      setValidMsg((prevMsg) => ({
-        ...prevMsg,
-        confirmPW: "비밀번호가 일치하지 않습니다.",
-      }));
-      setIsValid((prevValid) => ({ ...prevValid, confirmPW: false}));
+  const onChangeConPw = (e) => {
+    const passwordCurrent = e.target.value;
+    setInputConPw(passwordCurrent);
+    if (passwordCurrent !== inputPw) {
+      setConPwMessage("비밀 번호가 일치하지 않습니다.");
+      setIsConPw(false);
     } else {
-      setValidMsg((prevMsg) => ({
-        ... prevMsg,
-        confirmPW: "비밀번호가 일치합니다.",
-      }));
-      setIsValid((prevValid) => ({ ...prevValid, confirmPW: true}));
+      setConPwMessage("비밀 번호가 일치 합니다. )");
+      setIsConPw(true);
     }
   };
-
-  const memberRegCheck = async (id) => {
+  const onChangeName = (e) => {
+    setInputName(e.target.value);
+    setIsName(true);
+  };
+  // 회원 가입 여부 확인
+  const memberRegCheck = async (email) => {
     try {
-      const resp = await AxiosApi.memberRegCheck(id);
+      const resp = await AxiosApi.regCheck(email);
+      console.log("가입 가능 여부 확인 : ", resp.data);
       if (resp.data === true) {
-        setValidMsg((prevMsg) => ({
-          ...prevMsg,
-          id: "사용 가능한 아이디입니다.",
-        }));
-        setIsValid((prevValid) => ({ ...prevValid, id: true}));
+        setMailMessage("사용 가능한 이메일 입니다.");
+        setIsMail(true);
       } else {
-        setValidMsg((prevMsg) => ({
-          ...prevMsg,
-          id: "이미 존재하는 아이디입니다.",
-        }));
-        setIsValid((prevValid) => ({ ...prevValid, id: false}));
+        setMailMessage("중복된 이메일 입니다.");
+        setIsMail(false);
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
-
-  const handleRegistration = async () => {
-    const {id, pw, name} = formData;
-    try {
-      const memberReg = await AxiosApi.memberReg(id, pw, name);
-      if (memberReg.data === true) {
-        navigate("/");
-      } else {
-        alert("회원가입에 실패했습니다.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("오류가 발생했습니다. 다시 시도해 주세요.");
+  const onClickLogin = async () => {
+    const memberReg = await AxiosApi.signup(inputEmail, inputPw, inputName);
+    console.log(memberReg.data);
+    if (memberReg.data) {
+      navigate("/");
+    } else {
+      // setModalOpen(true);
+      // setModelText("회원 가입에 실패 했습니다.");
+      alert("회원 가입에 실패 했습니다.");
     }
   };
 
   return (
     <Container>
-      <FormContainer>
-        <h2 style={{ marginTop: "20px" }}>회원가입</h2>
-        <br />
-        <StyledTextField
-          id="id"
-          name="id"
-          value={formData.id}
-          onChange={handleInputChange}
-          label="아이디"
-          variant="outlined"
+      <Items className="sign">
+        <span>Sign Up</span>
+      </Items>
+
+      <Items variant="item2">
+        <Input
+          type="email"
+          placeholder="이메일"
+          value={inputEmail}
+          onChange={onChangeMail}
         />
-        {formData.id && (
-          <Span className={`message ${isValid.id ? "success" : "error"}`}>
-            {validMsg.id.split("\n").map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-          </Span>
+      </Items>
+      <Items variant="hint">
+        {inputEmail.length > 0 && (
+          <span className={`message ${isMail ? "success" : "error"}`}>
+            {mailMessage}
+          </span>
         )}
-        <StyledTextField
-          id="pw"
-          name="pw"
-          value={formData.pw}
-          onChange={handleInputChange}
-          label="비밀번호"
-          variant="outlined"
+      </Items>
+      <Items variant="item2">
+        <Input
           type="password"
+          placeholder="패스워드"
+          value={inputPw}
+          onChange={onChangePw}
         />
-        {formData.pw && (
-          <Span className={`message ${isValid.pw ? "success" : "error"}`}>
-            {validMsg.pw.split("\n").map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-          </Span>
+      </Items>
+      <Items variant="hint">
+        {inputPw.length > 0 && (
+          <span className={`message ${isPw ? "success" : "error"}`}>
+            {pwMessage}
+          </span>
         )}
-        <StyledTextField
-          id="confirmPW"
-          name="confirmPW"
-          value={formData.confirmPW}
-          onChange={handleInputChange}
-          label="비밀번호 확인"
-          variant="outlined"
+      </Items>
+      <Items variant="item2">
+        <Input
           type="password"
+          placeholder="패스워드 확인"
+          value={inputConPw}
+          onChange={onChangeConPw}
         />
-        {formData.confirmPW && (
-          <Span
-            className={`message ${isValid.confirmPW ? "success" : "error"}`}
-          >
-            {validMsg.confirmPW.split("\n").map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-          </Span>
+      </Items>
+      <Items variant="hint">
+        {inputPw.length > 0 && (
+          <span className={`message ${isConPw ? "success" : "error"}`}>
+            {conPwMessage}
+          </span>
         )}
-        <StyledTextField
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          label="이름"
-          variant="outlined"
+      </Items>
+      <Items variant="item2">
+        <Input
+          type="text"
+          placeholder="이름"
+          value={inputName}
+          onChange={onChangeName}
         />
-        {isValid.id && isValid.pw && isValid.confirmPW && isValid.name ? (
-          <StyledButton
-            variant="contained"
-            color="primary"
-            onClick={handleRegistration}
-          >
-            Signup
-          </StyledButton>
+      </Items>
+
+      <Items variant="item2">
+        {isMail && isPw && isConPw && isName ? (
+          <Button enabled onClick={onClickLogin}>
+            NEXT
+          </Button>
         ) : (
-          <StyledButton
-            disabled
-            variant="contained"
-            color="primary"
-            onClick={handleRegistration}
-          >
-            Signup
-          </StyledButton>
+          <Button disabled>NEXT</Button>
         )}
-      </FormContainer>
+      </Items>
     </Container>
   );
 };
-
 export default Signup;
