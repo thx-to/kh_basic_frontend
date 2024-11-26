@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Items } from "../../component/LoginComponent";
-import Button from "../../component/Button";
-import Input from "../../component/Input";
-import imgLogo from "../../images/kakaoLion.png";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import imgLogo from "../../images/kakaoLion.png";
+import Button from "../../components/ButtonComponent";
+import Input from "../../components/InputComponent";
+import { Container, Items } from "../../components/SignupComponent";
+import AxiosApi from "../../api/AxiosApi";
 
 const Img = styled.img`
   width: 180px;
@@ -12,45 +13,61 @@ const Img = styled.img`
 `;
 
 const Login = () => {
-  // 키보드 입력
+  // State for inputs
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
 
-  // 유효성 검사
-  const [isId, setIsId] = useState("");
-  const [isPw, setIsPw] = useState("");
+  const navigate = useNavigate();
 
-  // 5~ 20자리의 영문자, 숫자, 언더스코어(_)로 이루어진 문자열이 유효한 아이디 형식인지 검사하는 정규표현식
-  const onChangeEmail = (e) => {
-    setInputEmail(e.target.value);
-    e.target.value.length < 5 ? setIsId(false) : setIsId(true);
+  // State for validation
+  const [isId, setIsId] = useState(false);
+  const [isPw, setIsPw] = useState(false);
+
+  // Email and Password change handlers
+  const handleInputChange = (e, setState, setValidState) => {
+    setState(e.target.value);
+    setValidState(e.target.value.length >= 5);
   };
 
-  const onChangePw = (e) => {
-    setInputPw(e.target.value);
-    e.target.value.length < 5 ? setIsPw(false) : setIsPw(true);
+  // useEffect가 아니라서 함수 자체를 비동기로 만들 수 있음
+  const onClickLogin = async () => {
+    try {
+      const rsp = await AxiosApi.login(inputEmail, inputPw);
+      console.log(rsp.data);
+      if (rsp.data) {
+        navigate("/home");
+      } else {
+        alert("아이디 및 패스워드가 틀립니다.");
+      }
+    } catch (e) {
+      alert("서버가 응답하지 않습니다.");
+    }
   };
-  const onClickLogin = async () => {};
 
   return (
     <Container>
-      <Items className="item1">
+      <Items variant="sign">
         <Img src={imgLogo} alt="Logo" />
       </Items>
 
-      <Items className="item2">
+      <Items margin="10px">
         <Input
           placeholder="이메일"
           value={inputEmail}
-          onChange={onChangeEmail}
+          onChange={(e) => handleInputChange(e, setInputEmail, setIsId)}
         />
       </Items>
 
-      <Items className="item2">
-        <Input placeholder="패스워드" value={inputPw} onChange={onChangePw} />
+      <Items margin="10px">
+        <Input
+          type="password"
+          placeholder="패스워드"
+          value={inputPw}
+          onChange={(e) => handleInputChange(e, setInputPw, setIsPw)}
+        />
       </Items>
 
-      <Items className="item2">
+      <Items margin="10px">
         {isId && isPw ? (
           <Button enabled onClick={onClickLogin}>
             SIGN IN
@@ -60,7 +77,7 @@ const Login = () => {
         )}
       </Items>
 
-      <Items className="signup">
+      <Items variant="signup">
         <Link to="/Signup" className="link_style">
           <span>Sign Up</span>
         </Link>
@@ -68,4 +85,5 @@ const Login = () => {
     </Container>
   );
 };
+
 export default Login;

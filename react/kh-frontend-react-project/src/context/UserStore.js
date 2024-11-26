@@ -14,9 +14,6 @@ const UserStore = (props) => {
     localStorage.getItem("name") || "이름을 입력해주세요."
   );
 
-  const [userID, setUserID] = useState("");
-  const [userPW, setUserPW] = useState("");
-
   // 의존성 배열에 color를 넣어줘 컬러값을 바꾸는 순간에 useEffect에 컬러값 감지
   // 그 때 localStorage에 컬러값을 넣고 그 값을 위에서 읽어서 세팅하게 함
   useEffect(() => {
@@ -36,10 +33,6 @@ const UserStore = (props) => {
         setColor,
         name,
         setName,
-        userID,
-        setUserID,
-        userPW,
-        setUserPW,
       }}
     >
       {props.children}
