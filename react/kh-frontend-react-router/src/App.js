@@ -9,10 +9,16 @@ import Layout from './styles/REACT_241122_03_Layout';
 import Login from './pages/REACT_241122_04_Login';
 import GlobalStyle from './styles/REACT_241122_05_GlobalStyle';
 import UserStore from './context/REACT_241125_02_UserStore';
+import Setting from './pages/REACT_241125_03_Setting';
+import ImageUploader from './pages/REACT_241125_05_ImageUploader';
+import MaterialEx from './pages/REACT_241126_01_MaterialEx';
+import CardEx from './pages/REACT_241126_02_CardEx';
+import GridEx from './pages/REACT_241126_03_GridEx';
 
 function App() {
   return (
     <>
+      {/*
       <GlobalStyle />
       <UserStore>
         <Router>
@@ -24,10 +30,16 @@ function App() {
               <Route path="/profile/:username" element={<Profile />} />
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:id" element={<Article />} />
+              <Route path="/setting" element={<Setting />} />
+              <Route path="/firebase" element={<ImageUploader />} />
             </Route>
           </Routes>
         </Router>
       </UserStore>
+      <MaterialEx />
+      <CardEx />
+      */}
+      <GridEx />
     </>
   );
 }

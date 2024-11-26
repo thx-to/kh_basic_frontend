@@ -6,6 +6,7 @@ export const UserContext = createContext(null);
 const UserStore = (props) => {
   const [userID, setUserID] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [color, setColor] = useState("white");
 
   return (
     // 원래 객체가 들어가야 할 자리에 구조분해
@@ -16,6 +17,8 @@ const UserStore = (props) => {
         setUserID,
         userPassword,
         setUserPassword,
+        color,
+        setColor,
       }}
     >
       {props.children}
