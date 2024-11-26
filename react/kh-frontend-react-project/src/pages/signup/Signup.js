@@ -33,7 +33,7 @@ const Signup = () => {
     } else {
       setMailMessage("올바른 형식 입니다.");
       setIsMail(true);
-      memberRegCheck(e.target.value);
+      //memberRegCheck(e.target.value);
     }
   };
   const onChangePw = (e) => {
@@ -81,14 +81,18 @@ const Signup = () => {
     }
   };
   const onClickLogin = async () => {
-    const memberReg = await AxiosApi.signup(inputEmail, inputPw, inputName);
-    console.log(memberReg.data);
-    if (memberReg.data) {
-      navigate("/");
-    } else {
-      // setModalOpen(true);
-      // setModelText("회원 가입에 실패 했습니다.");
-      alert("회원 가입에 실패 했습니다.");
+    try {
+      const memberReg = await AxiosApi.signup(inputEmail, inputPw, inputName);
+      console.log(memberReg.data);
+      if (memberReg.data) {
+        navigate("/");
+      } else {
+        // setModalOpen(true);
+        // setModelText("회원 가입에 실패 했습니다.");
+        alert("회원 가입에 실패 했습니다.");
+      }
+    } catch (e) {
+      alert("서버가 응답하지 않습니다.");
     }
   };
 

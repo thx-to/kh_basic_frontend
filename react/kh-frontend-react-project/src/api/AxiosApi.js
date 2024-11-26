@@ -13,6 +13,9 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/auth/exists/${email}`);
   },
   signup: async (email, pw, name) => {
+    console.log("이메일 : ", email);
+    console.log("패스워드 : ", pw);
+    console.log("이름 : ", name);
     const member = {
       email: email,
       password: pw,
