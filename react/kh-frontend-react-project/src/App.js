@@ -4,6 +4,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import UserStore from './context/UserStore';
 import Login from './pages/signup/Login';
 import Signup from './pages/signup/Signup';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </Router>
       </UserStore>
