@@ -49,6 +49,13 @@ const Login = () => {
   const onClickLogin = async () => {
     try {
       const rsp = await AxiosApi.login(inputEmail, inputPw);
+
+      // 로그인 성공시 로컬스토리지에 이메일 저장
+      localStorage.setItem("email", inputEmail);
+
+      // 로그인 성공시 로컬스토리지에 로그인 성공상황 저장
+      localStorage.setItem("isLogin", "TRUE");
+
       console.log(rsp.data);
       if (rsp.data) {
         navigate("/home");
