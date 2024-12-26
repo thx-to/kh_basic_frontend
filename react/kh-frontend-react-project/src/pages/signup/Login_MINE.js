@@ -25,7 +25,7 @@ const FormContainer = styled.div`
   min-height: 400px;
   background-color: white;
   border-radius: 30px;
-  box-shadow: 3px 3px 10px 3px rgba(0,0,0,.05);
+  box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.05);
 `;
 
 // Material-UI TextField 재정의
@@ -60,7 +60,6 @@ const P1 = styled.p`
 
 // Login 컴포넌트
 const Login = () => {
-
   // 입력에 대한 상태 관리
   const [inputID, setInputID] = useState("");
   const [inputPW, setInputPW] = useState("");
@@ -76,7 +75,7 @@ const Login = () => {
   const context = useContext(UserContext);
 
   // 2개만 구조분해해서 빼오기
-  const {setUserID, setUserPW} = context;
+  const { setUserID, setUserPW } = context;
 
   const onChangeID = (e) => {
     // inputID는 마지막 입력값이 반영(업데이트)이 안된 상태라서 setInputID로 비교
@@ -91,14 +90,14 @@ const Login = () => {
     setInputPW(e.target.value);
     setUserPW(e.target.value);
     e.target.value.length >= 5 ? setIsPW(true) : setIsPW(false);
-  }
+  };
 
   const onClickLogin = () => {
     if (inputID === "admin" && inputPW === "12345") {
       navigate("/home");
     } else {
       alert("아이디 혹은 비밀번호를 잘못 입력하셨습니다.");
-    };
+    }
   };
 
   const onClickSignup = () => {

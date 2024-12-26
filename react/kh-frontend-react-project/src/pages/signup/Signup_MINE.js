@@ -59,7 +59,6 @@ const Span = styled.span`
 `;
 
 const Signup = () => {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -80,24 +79,27 @@ const Signup = () => {
     pw: false,
     confirmPW: false,
     name: false,
-  })
+  });
 
   const handleInputChange = (e) => {
-    const {name, value} = e.target;
-    setFormData((prevData) => ({...prevData, [name]: value}));
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
 
     switch (name) {
-      case "id" :
+      case "id":
         validID(value);
         break;
-      case "pw" :
+      case "pw":
         validPW(value);
         break;
-      case "confirmPW" :
+      case "confirmPW":
         validConfirmPW(value);
         break;
-      case "name" :
-        setIsValid((prevValid) => ({ ...prevValid, name: value.trim().length > 0 }));
+      case "name":
+        setIsValid((prevValid) => ({
+          ...prevValid,
+          name: value.trim().length > 0,
+        }));
         break;
       default:
         break;
@@ -111,7 +113,7 @@ const Signup = () => {
         ...prevMsg,
         id: "아이디는 영문자, 숫자, 언더바(_)만 포함할 수 있으며,\n8자 이상 20자 이하여야 합니다.",
       }));
-      setIsValid((prevValid) => ({ ...prevValid, id: false}));
+      setIsValid((prevValid) => ({ ...prevValid, id: false }));
     } else {
       memberRegCheck(id);
     }
@@ -125,12 +127,12 @@ const Signup = () => {
         ...prevMsg,
         pw: "비밀번호는 영문 대소문자, 숫자, 특수문자를\n모두 포함하여 8자리 이상이어야 합니다.",
       }));
-      setIsValid((prevValid) => ({ ...prevValid, pw: false}));
+      setIsValid((prevValid) => ({ ...prevValid, pw: false }));
     } else {
       setValidMsg((prevMsg) => ({
-        password: "안전합니다."
+        password: "안전합니다.",
       }));
-      setIsValid((prevValid) => ({ ...prevValid, password: true}));
+      setIsValid((prevValid) => ({ ...prevValid, password: true }));
     }
   };
 
@@ -140,13 +142,13 @@ const Signup = () => {
         ...prevMsg,
         confirmPW: "비밀번호가 일치하지 않습니다.",
       }));
-      setIsValid((prevValid) => ({ ...prevValid, confirmPW: false}));
+      setIsValid((prevValid) => ({ ...prevValid, confirmPW: false }));
     } else {
       setValidMsg((prevMsg) => ({
-        ... prevMsg,
+        ...prevMsg,
         confirmPW: "비밀번호가 일치합니다.",
       }));
-      setIsValid((prevValid) => ({ ...prevValid, confirmPW: true}));
+      setIsValid((prevValid) => ({ ...prevValid, confirmPW: true }));
     }
   };
 
@@ -158,13 +160,13 @@ const Signup = () => {
           ...prevMsg,
           id: "사용 가능한 아이디입니다.",
         }));
-        setIsValid((prevValid) => ({ ...prevValid, id: true}));
+        setIsValid((prevValid) => ({ ...prevValid, id: true }));
       } else {
         setValidMsg((prevMsg) => ({
           ...prevMsg,
           id: "이미 존재하는 아이디입니다.",
         }));
-        setIsValid((prevValid) => ({ ...prevValid, id: false}));
+        setIsValid((prevValid) => ({ ...prevValid, id: false }));
       }
     } catch (error) {
       console.error(error);
@@ -172,7 +174,7 @@ const Signup = () => {
   };
 
   const handleRegistration = async () => {
-    const {id, pw, name} = formData;
+    const { id, pw, name } = formData;
     try {
       const memberReg = await AxiosApi.memberReg(id, pw, name);
       if (memberReg.data === true) {

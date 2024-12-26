@@ -84,7 +84,7 @@ const Layout = () => {
             { icon: <FaRegNewspaper />, label: "News", to: "/news" },
             { icon: <CgProfile />, label: "Members", to: "/members" },
             { icon: <BiCameraMovie />, label: "Movies", to: "/movies" },
-            { icon: <LuListTodo />, label: "ToDos", to: "/todos" },
+            { icon: <LuListTodo />, label: "ChatList", to: "/chat" },
           ].map((item, index) => (
             <StyledMenuItem key={index}>
               <MenuIcon>{item.icon}</MenuIcon>
