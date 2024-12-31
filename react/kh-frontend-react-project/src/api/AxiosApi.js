@@ -37,10 +37,15 @@ const AxiosApi = {
     return await AxiosInstance.get("/members/memberlist");
   },
 
-  // 개별 회원 조회
+  // 개별 회원 조회 (수정)
   memberInfo: async (email) => {
-    return await axios.get(KH_DOMAIN + `/members/${email}`);
+    return await AxiosInstance.get(`/members/${email}`);
   },
+
+  // // 개별 회원 조회
+  // memberInfo: async (email) => {
+  //   return await axios.get(KH_DOMAIN + `/members/${email}`);
+  // },
 
   // 채팅방 목록 가져오기
   chatList: async () => {
@@ -62,7 +67,6 @@ const AxiosApi = {
   chatDetail: async (roomId) => {
     return await axios.get(KH_DOMAIN + "/chat/room/${roomId}");
   },
-
 };
 
 export default AxiosApi;

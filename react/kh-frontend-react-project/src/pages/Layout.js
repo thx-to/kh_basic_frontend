@@ -42,6 +42,7 @@ const Layout = () => {
     const getMemberInfo = async() => {
       try {
         const rsp = await AxiosApi.memberInfo(email);
+        console.log("Layout: ", rsp.data);
         setMember(rsp.data);
       } catch (e) {
         alert("서버가 응답하지 않습니다.");

@@ -14,7 +14,7 @@ const Home = () => {
       // 통신 구간이니까 try ~ catch 구문 걸어주기
       try {
       const rsp = await AxiosApi.memberList(); // 매개변수가 없기 때문에 이렇게만 입력
-      console.log(rsp.data);
+      console.log("Home: ", rsp.data);
       setMembers(rsp.data);
       } catch (e) {
         alert("서버가 응답하지 않습니다.", e);
