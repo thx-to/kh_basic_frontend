@@ -4,7 +4,7 @@ import JsxSyntax from "./REACT_241118_01_JSXGrammer";
 import GreetingComponent from "./REACT_241118_02_GreetingComponent";
 import WelcomeProps from "./REACT_241118_03_WelcomeProps";
 import Articles from "./REACT_241118_04_Articles";
-import MyComponent from "./REACT_241118_05_MyComponent";
+import MyComponent from "./REACT_241118_07_MyComponent";
 import BoxComponent from "./REACT_241118_06_BoxComponent";
 import Counter from "./REACT_241119_01_ClassComponent";
 import Say from "./REACT_241119_02_Say";
@@ -21,6 +21,7 @@ import ReducerCnt from "./REACT_241121_01_ReducerState";
 import Average from "./REACT_241121_02_Average";
 import CreateRef from "./REACT_241121_03_RefEx1";
 import KeepInnerValue from "./REACT_241121_04_RefEx2";
+import GenderChart from "./REACT_250212_01_GenderChart";
 
 // REACT_241118_01_JSX문법.js에서 Default로 export했던거랑 Mapping됨
 // 하위컴포넌트를 import해오기
@@ -58,7 +59,8 @@ function App() {
       <Average />
       <CreateRef />
       */}
-      <KeepInnerValue />
+      {/* <KeepInnerValue /> */}
+      <GenderChart />
     </>
   );
 }

@@ -1,5 +1,5 @@
 // Article이라는 컴포넌트 별도로 만들어주기
-import Article from "./REACT_241118_04_Article";
+import Article from "./REACT_241118_05_Article";
 
 // 컴포넌트 합성 : 여러 개의 컴포넌트를 조합하여 하나의 컴포넌트를 만듦
 // 컴포넌트의 재사용성과 추상화를 높임
